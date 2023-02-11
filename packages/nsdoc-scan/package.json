@@ -1,0 +1,35 @@
+{
+  "name": "@tzkit/nsdoc-scan",
+  "version": "1.0.0",
+  "description": "Add a plugin description",
+  "main": "index",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "ios": "6.0.0",
+      "android": "6.0.0"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terencezama/tzkit.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "TypeScript",
+    "iOS",
+    "Android"
+  ],
+  "author": {
+    "name": "terence zama",
+    "email": "terence@bazaks.com"
+  },
+  "bugs": {
+    "url": "https://github.com/terencezama/tzkit/issues"
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/terencezama/tzkit",
+  "readmeFilename": "README.md",
+  "bootstrapper": "@nativescript/plugin-seed"
+}

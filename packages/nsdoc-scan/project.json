@@ -1,0 +1,65 @@
+{
+  "name": "nsdoc-scan",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/nsdoc-scan",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/nsdoc-scan",
+        "tsConfig": "packages/nsdoc-scan/tsconfig.json",
+        "packageJson": "packages/nsdoc-scan/package.json",
+        "main": "packages/nsdoc-scan/index.d.ts",
+        "assets": [
+          "packages/nsdoc-scan/*.md",
+          "packages/nsdoc-scan/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/nsdoc-scan/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["node tools/scripts/build-finish.ts nsdoc-scan"],
+        "parallel": false
+      },
+      "outputs": ["dist/packages/nsdoc-scan"],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages nsdoc-scan"],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/nsdoc-scan/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}
