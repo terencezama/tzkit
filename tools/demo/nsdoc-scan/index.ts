@@ -1,5 +1,5 @@
 import { DemoSharedBase } from '../utils';
-import {} from '@tzkit/nsdoc-scan';
+import { NsdocScan } from '@tzkit/nsdoc-scan';
 
 export class DemoSharedNsdocScan extends DemoSharedBase {
   testIt() {

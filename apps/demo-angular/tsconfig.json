@@ -4,7 +4,7 @@
     "paths": {
       "~/*": ["src/*"],
       "@demo/shared": ["tools/demo/index.ts"],
-      "@tzkit/*": ["../../dist/packages/*"]
+      "@tzkit/nsdoc-scan": ["dist/packages/nsdoc-scan/index.d.ts"]
     }
   },
   "files": ["./references.d.ts", "./src/main.ts", "./src/polyfills.ts"],
