@@ -1,11 +1,4 @@
-# @tzkit/\* plugins
-
-```
-npm run setup
-npm start
-```
-
-- [@tzkit/nsdoc-scan](packages/nsdoc-scan/README.md)
+- [@tzkit/idscanner](packages/idscanner/README.md)
 
 # How to use?
 

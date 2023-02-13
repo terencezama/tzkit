@@ -5,7 +5,7 @@
   "repository": "<fill-your-repository-here>",
   "dependencies": {
     "@nativescript/core": "file:../../node_modules/@nativescript/core",
-    "@tzkit/nsdoc-scan": "file:../../packages/nsdoc-scan"
+    "@tzkit/idscanner": "file:../../packages/idscanner"
   },
   "devDependencies": {
     "@nativescript/android": "~8.4.0",

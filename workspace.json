@@ -3,7 +3,7 @@
   "projects": {
     "demo": "apps/demo",
     "demo-angular": "apps/demo-angular",
-    "nsdoc-scan": "packages/nsdoc-scan"
+    "idscanner": "packages/idscanner"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

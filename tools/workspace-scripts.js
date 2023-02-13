@@ -68,6 +68,13 @@ module.exports = {
           description: '@tzkit/nsdoc-scan: Build',
         },
       },
+      // @tzkit/idscanner
+      idscanner: {
+        build: {
+          script: 'nx run idscanner:build.all',
+          description: '@tzkit/idscanner: Build',
+        },
+      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -81,6 +88,10 @@ module.exports = {
       'nsdoc-scan': {
         script: 'nx run nsdoc-scan:focus',
         description: 'Focus on @tzkit/nsdoc-scan',
+      },
+      idscanner: {
+        script: 'nx run idscanner:focus',
+        description: 'Focus on @tzkit/idscanner',
       },
       reset: {
         script: 'nx g @tzkit/plugin-tools:focus-packages',

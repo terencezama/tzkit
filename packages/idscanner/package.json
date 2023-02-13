@@ -1,5 +1,5 @@
 {
-  "name": "@tzkit/nsdoc-scan",
+  "name": "@tzkit/idscanner",
   "version": "1.0.0",
   "description": "Add a plugin description",
   "main": "index",

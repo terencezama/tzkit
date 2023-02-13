@@ -1,23 +1,23 @@
 {
-  "name": "nsdoc-scan",
+  "name": "idscanner",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "packages/nsdoc-scan",
+  "sourceRoot": "packages/idscanner",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "options": {
-        "outputPath": "dist/packages/nsdoc-scan",
-        "tsConfig": "packages/nsdoc-scan/tsconfig.json",
-        "packageJson": "packages/nsdoc-scan/package.json",
-        "main": "packages/nsdoc-scan/index.d.ts",
+        "outputPath": "dist/packages/idscanner",
+        "tsConfig": "packages/idscanner/tsconfig.json",
+        "packageJson": "packages/idscanner/package.json",
+        "main": "packages/idscanner/index.d.ts",
         "assets": [
-          "packages/nsdoc-scan/*.md",
-          "packages/nsdoc-scan/index.d.ts",
+          "packages/idscanner/*.md",
+          "packages/idscanner/index.d.ts",
           "LICENSE",
           {
             "glob": "**/*",
-            "input": "packages/nsdoc-scan/platforms/",
+            "input": "packages/idscanner/platforms/",
             "output": "./platforms/"
           }
         ],
@@ -32,10 +32,10 @@
     "build.all": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["node tools/scripts/build-finish.ts nsdoc-scan"],
+        "commands": ["node tools/scripts/build-finish.ts idscanner"],
         "parallel": false
       },
-      "outputs": ["dist/packages/nsdoc-scan"],
+      "outputs": ["dist/packages/idscanner"],
       "dependsOn": [
         {
           "target": "build.all",
@@ -50,14 +50,14 @@
     "focus": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["nx g @nativescript/plugin-tools:focus-packages nsdoc-scan"],
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages idscanner"],
         "parallel": false
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["packages/nsdoc-scan/**/*.ts"]
+        "lintFilePatterns": ["packages/idscanner/**/*.ts"]
       }
     }
   },

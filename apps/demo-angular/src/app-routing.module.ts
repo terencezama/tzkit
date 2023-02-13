@@ -7,7 +7,7 @@ import { HomeComponent } from './home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'nsdoc', loadChildren: () => import('./plugin-demos/nsdoc-scan.module').then((m) => m.NsdocScanModule) },
+  { path: 'idscanner', loadChildren: () => import('./plugin-demos/idscanner.module').then((m) => m.IdscannerModule) },
 ];
 
 @NgModule({

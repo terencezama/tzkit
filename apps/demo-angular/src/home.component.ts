@@ -8,7 +8,7 @@ import { ItemEventData } from '@nativescript/core';
 export class HomeComponent {
   demos = [
     {
-      name: 'nsdoc',
+      name: 'idscanner',
     },
   ];
 

@@ -22,7 +22,8 @@
     "paths": {
       "@demo/shared": ["tools/demo/index.ts"],
       "@tzkit/*": ["packages/*"],
-      "@tzkit/nsdoc-scan": ["packages/nsdoc-scan/index.d.ts"]
+      "@tzkit/nsdoc-scan": ["packages/nsdoc-scan/index.d.ts"],
+      "@tzkit/idscanner": ["packages/idscanner/index.d.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
