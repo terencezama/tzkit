@@ -88,19 +88,23 @@ declare module com {
     export module ui {
       export class NSDocScanActivity {
         public static class: java.lang.Class<com.tzkit.ui.NSDocScanActivity>;
-        documentScanner: com.tzkit.ui.NSDocScan;
         public onCreate(param0: globalAndroid.os.Bundle): void;
         public constructor();
         public getDocumentScanner(): com.tzkit.ui.NSDocScan;
       }
-      export module NSDocScanActivity {
-        export class Companion {
-          static show() {
-            throw new Error('Method not implemented.');
-          }
-          public static class: java.lang.Class<com.tzkit.ui.NSDocScanActivity.Companion>;
-          public show(param0: androidx.activity.ComponentActivity): void;
-        }
+    }
+  }
+}
+
+declare module com {
+  export module tzkit {
+    export module ui {
+      export class NSDocScanManager {
+        public static class: java.lang.Class<com.tzkit.ui.NSDocScanManager>;
+        public static INSTANCE: com.tzkit.ui.NSDocScanManager;
+        public setCallback(param0: com.tzkit.ui.NSDocCallback): void;
+        public show(param0: androidx.activity.ComponentActivity): void;
+        public getCallback(): com.tzkit.ui.NSDocCallback;
       }
     }
   }
