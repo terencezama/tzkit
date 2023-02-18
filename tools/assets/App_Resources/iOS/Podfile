@@ -1,9 +1,29 @@
 platform :ios, '13.0'
 
+require 'xcodeproj'
+
+project_path = 'demoangular.xcodeproj'
+project = Xcodeproj::Project.open(project_path)
+
+project.build_configurations.each do |config|
+    config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+end
+project.targets.each do |target|
+    if target.name == 'demoangular'
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+        end
+    end
+  end
+project.save
+
 post_install do |installer|
+
+  
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+      config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
     end
   end
 end
