@@ -9,49 +9,9 @@ import UIKit
 import MLKit
 
 
-@objc class MLTextBase: NSObject {
-    let text: String
-    let cornerPoints: [NSValue]?
-    let frame: CGRect?
-    
-    internal init(text: String, cornerPoints: [NSValue]?, frame: CGRect?) {
-        self.text = text
-        self.cornerPoints = cornerPoints
-        self.frame = frame
-    }
-}
-
-@objc class MLTextElement: NSObject {
-    let elem: MLTextBase
-    
-    internal init(elem: MLTextBase) {
-        self.elem = elem
-    }
-}
-
-@objc class MLTextLine: NSObject {
-    let line: MLTextBase
-    var elements: [MLTextElement]
-    
-    internal init(line: MLTextBase, elements: [MLTextElement]) {
-        self.line = line
-        self.elements = elements
-    }
-}
-
-@objc class MLTextBloc: NSObject {
-    let bloc: MLTextBase
-    var lines: [MLTextLine]
-    
-    internal init(bloc: MLTextBase, lines: [MLTextLine]) {
-        self.bloc = bloc
-        self.lines = lines
-    }
-}
-
 @objc protocol NSDocCallback {
     func onImageSelected(image: UIImage)
-    func onSuccess(blocs: [MLTextBloc])
+    func onSuccess(blocs: NSArray)
     func onError(message: String)
     func userCancelled()
 }
@@ -95,24 +55,41 @@ class NSDocScanVc: NSObject, VNDocumentCameraViewControllerDelegate {
             return
           }
           // Recognized text
-//            let resultText = result.text
-            var mlBlocs:[MLTextBloc] = []
+            var nsBlocs = NSMutableArray()
             for block in result.blocks {
 
-                
-                let mlBloc = MLTextBloc(bloc: MLTextBase(text: block.text, cornerPoints: block.cornerPoints, frame: block.frame), lines: [])
+                let nsBloc: NSDictionary = ["bloc":  [
+                    "text": block.text,
+                    "cornerPoints": block.cornerPoints,
+                    "frame": block.frame] as NSDictionary,
+                                              "lines": NSMutableArray()
+                ]
+
                 for line in block.lines {
-                    let mlLine = MLTextLine(line: MLTextBase(text: line.text, cornerPoints: line.cornerPoints, frame: line.frame), elements: [])
-                    mlBloc.lines.append(mlLine)
+
+                    let nsLine: NSDictionary = ["line":  [
+                        "text": line.text,
+                        "cornerPoints": line.cornerPoints,
+                        "frame": line.frame] as NSDictionary,
+                                                  "elements": NSMutableArray()
+                    ]
+                    (nsBloc["lines"] as! NSMutableArray).add(nsLine)
                     for element in line.elements {
-                        let mlElem = MLTextElement(elem: MLTextBase(text: element.text, cornerPoints: element.cornerPoints, frame: element.frame))
-                        mlLine.elements.append(mlElem)
+
+                        let nsElem: NSDictionary = ["elem":  [
+                            "text": element.text,
+                            "cornerPoints": element.cornerPoints,
+                            "frame": element.frame] as NSDictionary
+                        ]
+
+                        (nsLine["elements"] as! NSMutableArray).add(nsElem)
                     }
                 }
-                mlBlocs.append(mlBloc)
+
+                nsBlocs.add(nsBloc)
             }
             
-            self.callback?.onSuccess(blocs: mlBlocs)
+            self.callback?.onSuccess(blocs: nsBlocs)
             
 
         }

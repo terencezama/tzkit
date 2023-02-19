@@ -12,7 +12,7 @@ export class Idscanner extends IdscannerCommon {
       new com.tzkit.ui.NSDocCallback({
         onImageSelected(param0: globalAndroid.graphics.Bitmap) {
           // alert('cool');
-          alert('cool');
+          // alert('cool');
         },
         onSuccess(param0: androidNative.Array<com.tzkit.ui.MLTextBloc>) {
           setTimeout(() => {
