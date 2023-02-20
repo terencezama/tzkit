@@ -9,6 +9,9 @@ class NSDocCallbackImpl extends NSObject implements NSDocCallback {
   }
   public cCallback?: IdscannerCallback;
 
+  onSuccessWithJson(json: string): void {
+    this.cCallback?.onSuccessWithBlocs(JSON.parse(json));
+  }
   onErrorWithMessage(message: string): void {
     this.cCallback?.onErrorWithMessage(message);
   }
@@ -20,11 +23,7 @@ class NSDocCallbackImpl extends NSObject implements NSDocCallback {
     nsImage.nativeView = uiimageView;
     this.cCallback?.onImageSelectedWithImage(nsImage);
   }
-  onSuccessWithBlocs(blocs: NSArray<MLTextBloc> | MLTextBloc[]): void {
-    console.log(blocs);
 
-    this.cCallback?.onSuccessWithBlocs(JSON.stringify(blocs));
-  }
   userCancelled(): void {
     this.cCallback?.userCancelled();
   }

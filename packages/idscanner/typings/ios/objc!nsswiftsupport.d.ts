@@ -1,33 +1,9 @@
-declare class MLTextBase extends NSObject {
-  static alloc(): MLTextBase; // inherited from NSObject
-
-  static new(): MLTextBase; // inherited from NSObject
-}
-
-declare class MLTextBloc extends NSObject {
-  static alloc(): MLTextBloc; // inherited from NSObject
-
-  static new(): MLTextBloc; // inherited from NSObject
-}
-
-declare class MLTextElement extends NSObject {
-  static alloc(): MLTextElement; // inherited from NSObject
-
-  static new(): MLTextElement; // inherited from NSObject
-}
-
-declare class MLTextLine extends NSObject {
-  static alloc(): MLTextLine; // inherited from NSObject
-
-  static new(): MLTextLine; // inherited from NSObject
-}
-
 interface NSDocCallback {
   onErrorWithMessage(message: string): void;
 
   onImageSelectedWithImage(image: UIImage): void;
 
-  onSuccessWithBlocs(blocs: NSArray<MLTextBloc> | MLTextBloc[]): void;
+  onSuccessWithJson(json: string): void;
 
   userCancelled(): void;
 }
@@ -61,6 +37,10 @@ declare class NSDocScanVc extends NSObject implements VNDocumentCameraViewContro
   class(): typeof NSObject;
 
   conformsToProtocol(aProtocol: any /* Protocol */): boolean;
+
+  convertFrame(frame: CGRect): NSArray<any>;
+
+  convertPoints(points: NSArray<NSValue> | NSValue[]): NSArray<any>;
 
   documentCameraViewControllerDidCancel(controller: VNDocumentCameraViewController): void;
 

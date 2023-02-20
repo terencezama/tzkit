@@ -5,6 +5,9 @@ import { Idscanner } from '@tzkit/idscanner';
 export class DemoSharedIdscanner extends DemoSharedBase {
   scanner = new Idscanner();
   testIt() {
+    // this.scanner.callback = {
+
+    // }
     this.scanner.callback = {
       onErrorWithMessage(message: string): void {},
       onImageSelectedWithImage(image: Image): void {

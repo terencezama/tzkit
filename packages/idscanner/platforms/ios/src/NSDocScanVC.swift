@@ -11,7 +11,7 @@ import MLKit
 
 @objc protocol NSDocCallback {
     func onImageSelected(image: UIImage)
-    func onSuccess(blocs: NSArray)
+    func onSuccess(json: String)
     func onError(message: String)
     func userCancelled()
 }
@@ -26,6 +26,24 @@ class NSDocScanVc: NSObject, VNDocumentCameraViewControllerDelegate {
     override init() {
         super.init()
         documentCameraViewController.delegate = self
+    }
+    
+    func convertPoints(_ points: [NSValue]) -> NSArray {
+        return points.map { v in
+            let point = v as! CGPoint;
+            return [
+                 point.x,
+                 point.y
+            ] as NSArray
+        } as NSArray
+    }
+    func convertFrame(_ frame: CGRect) -> NSArray {
+        return [
+            frame.origin.x,
+            frame.origin.y,
+            frame.size.width,
+            frame.size.height
+        ] as NSArray
     }
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
@@ -55,22 +73,22 @@ class NSDocScanVc: NSObject, VNDocumentCameraViewControllerDelegate {
             return
           }
           // Recognized text
-            var nsBlocs = NSMutableArray()
+            let nsBlocs = NSMutableArray()
             for block in result.blocks {
-
                 let nsBloc: NSDictionary = ["bloc":  [
                     "text": block.text,
-                    "cornerPoints": block.cornerPoints,
-                    "frame": block.frame] as NSDictionary,
+                    "cornerPoints": self.convertPoints(block.cornerPoints),
+                    "frame": self.convertFrame(block.frame)] as NSDictionary,
                                               "lines": NSMutableArray()
                 ]
+                
 
                 for line in block.lines {
 
                     let nsLine: NSDictionary = ["line":  [
                         "text": line.text,
-                        "cornerPoints": line.cornerPoints,
-                        "frame": line.frame] as NSDictionary,
+                        "cornerPoints": self.convertPoints(line.cornerPoints),
+                        "frame": self.convertFrame(line.frame)] as NSDictionary,
                                                   "elements": NSMutableArray()
                     ]
                     (nsBloc["lines"] as! NSMutableArray).add(nsLine)
@@ -78,8 +96,8 @@ class NSDocScanVc: NSObject, VNDocumentCameraViewControllerDelegate {
 
                         let nsElem: NSDictionary = ["elem":  [
                             "text": element.text,
-                            "cornerPoints": element.cornerPoints,
-                            "frame": element.frame] as NSDictionary
+                            "cornerPoints": self.convertPoints(element.cornerPoints),
+                            "frame": self.convertFrame(element.frame)] as NSDictionary
                         ]
 
                         (nsLine["elements"] as! NSMutableArray).add(nsElem)
@@ -89,9 +107,14 @@ class NSDocScanVc: NSObject, VNDocumentCameraViewControllerDelegate {
                 nsBlocs.add(nsBloc)
             }
             
-            self.callback?.onSuccess(blocs: nsBlocs)
+            guard
+                let jsonData = try? JSONSerialization.data(withJSONObject: nsBlocs, options: []),
+                let json = String(data: jsonData, encoding: .ascii)
+            else { return}
             
-
+            
+            self.callback?.onSuccess(json: json)
+            
         }
 
         
