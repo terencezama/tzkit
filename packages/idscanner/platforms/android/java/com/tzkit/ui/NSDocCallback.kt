@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 
 interface NSDocCallback {
     fun onImageSelected( image: Bitmap)
-    fun onSuccess(blocs: Array<MLTextBloc>)
+    fun onSuccess(json: String)
     fun onError(message: String)
     fun userCancelled()
 }

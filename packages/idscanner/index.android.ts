@@ -1,5 +1,5 @@
-import { Application } from '@nativescript/core';
-import { IdscannerCommon } from './common';
+import { Application, ImageSource } from '@nativescript/core';
+import { IdscannerCommon, IdscannerCallback } from './common';
 
 export class Idscanner extends IdscannerCommon {
   start() {
@@ -8,24 +8,22 @@ export class Idscanner extends IdscannerCommon {
     // const intent = new android.content.Intent(activity, com.tzkit.ui.NSDocScanActivity.class);
     // activity.startActivity(intent);
 
+    const callback: IdscannerCallback = this.callback;
+
     com.tzkit.ui.NSDocScanManager.INSTANCE.setCallback(
       new com.tzkit.ui.NSDocCallback({
         onImageSelected(param0: globalAndroid.graphics.Bitmap) {
-          // alert('cool');
-          // alert('cool');
+          const imageSource = new ImageSource(param0);
+          callback?.onImageSelectedWithImage(imageSource);
         },
-        onSuccess(param0: androidNative.Array<com.tzkit.ui.MLTextBloc>) {
-          setTimeout(() => {
-            console.log('cooler');
-            console.log(JSON.stringify(param0));
-            alert('cool');
-          }, 3000);
+        onSuccess(param0: string) {
+          callback?.onSuccessWithBlocs(JSON.parse(param0));
         },
         onError(param0: string) {
-          console.log('some error happened');
+          callback?.onErrorWithMessage(param0);
         },
         userCancelled() {
-          console.log('user cancelled');
+          callback?.userCancelled();
         },
       })
     );

@@ -3,6 +3,8 @@
   <ScrollView class="h-full">
     <StackLayout>
       <Button text="Test idscanner" (tap)="demoShared.testIt()" class="btn btn-primary"></Button>
+      <image [src]="demoShared.imageSrc" />
+      <Label [text]="demoShared.console" textWrap="true"></Label>
     </StackLayout>
   </ScrollView>
 </StackLayout>

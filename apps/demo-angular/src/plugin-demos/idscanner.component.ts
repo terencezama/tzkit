@@ -12,6 +12,6 @@ export class IdscannerComponent {
   constructor(private _ngZone: NgZone) {}
 
   ngOnInit() {
-    this.demoShared = new DemoSharedIdscanner();
+    this.demoShared = new DemoSharedIdscanner(this._ngZone);
   }
 }

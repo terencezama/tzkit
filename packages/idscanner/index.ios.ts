@@ -1,3 +1,4 @@
+import { ImageSource } from './../../apps/demo-angular/node_modules/@nativescript/core/image-source/index.d';
 import { Image, Utils } from '@nativescript/core';
 import { IdscannerCallback, IdscannerCommon } from './common';
 
@@ -16,11 +17,7 @@ class NSDocCallbackImpl extends NSObject implements NSDocCallback {
     this.cCallback?.onErrorWithMessage(message);
   }
   onImageSelectedWithImage(image: UIImage): void {
-    const nsImage = new Image();
-    const uiimageView = new UIImageView({
-      image,
-    });
-    nsImage.nativeView = uiimageView;
+    const nsImage = new ImageSource(image);
     this.cCallback?.onImageSelectedWithImage(nsImage);
   }
 
