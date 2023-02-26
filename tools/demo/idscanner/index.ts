@@ -26,10 +26,9 @@ export class DemoSharedIdscanner extends DemoSharedBase implements IdscannerCall
     });
   }
   onSuccessWithBlocs(blocs: any): void {
-    this.console = JSON.stringify(blocs);
-    setTimeout(() => {
-      alert('cool');
-    }, 3000);
+    this._ngZone.run(() => {
+      this.console = JSON.stringify(blocs);
+    });
   }
   userCancelled(): void {}
 }

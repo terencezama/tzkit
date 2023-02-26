@@ -1,5 +1,4 @@
-import { ImageSource } from './../../apps/demo-angular/node_modules/@nativescript/core/image-source/index.d';
-import { Image, Utils } from '@nativescript/core';
+import { Image, Utils, ImageSource } from '@nativescript/core';
 import { IdscannerCallback, IdscannerCommon } from './common';
 
 @NativeClass()
